@@ -1,4 +1,4 @@
-namespace Api.Models
+namespace Services.Contracts
 {
     public class CoinModel
     {

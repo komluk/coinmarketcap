@@ -1,18 +1,24 @@
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Api.Models;
+using Services.Contracts;
 
-namespace Api.Services
+namespace Services
 {
-    public class CoinsService
+    public interface ICoinsService
+    {
+        
+    }
+
+    public class CoinsService: ICoinsService
     {
         private readonly HttpClient httpClient;
         public CoinsService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
+        
         public async Task<CoinModel[]> GetAllCoins()
         {
             return await GetAsync<CoinModel[]>("v1/ticker/");
