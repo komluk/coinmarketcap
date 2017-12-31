@@ -9,17 +9,16 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class CoinsController : Controller
     {
+        private readonly ICoinsService _service;
+        public CoinsController(ICoinsService service)
+        {
+            _service = service;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://api.coinmarketcap.com");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
-                var service = new CoinsService(client);
-                var result = await service.GetAllCoins();
-                return Ok(result);
-            }
+            return Ok(await _service.GetAllCoins());
         }
 
         [HttpGet("{convert}")]

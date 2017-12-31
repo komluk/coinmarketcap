@@ -8,17 +8,17 @@ namespace Services
 {
     public interface ICoinsService
     {
-        
+        Task<CoinModel[]> GetAllCoins();
     }
 
-    public class CoinsService: ICoinsService
+    public class CoinsService : ICoinsService
     {
         private readonly HttpClient httpClient;
         public CoinsService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
-        
+
         public async Task<CoinModel[]> GetAllCoins()
         {
             return await GetAsync<CoinModel[]>("v1/ticker/");
